@@ -7,7 +7,8 @@ A Web App to test one's skill for a STEM Expo Project
 - Compile the data and application and present it to the STEM expo
 
 # TODO
-- Make the homepage 
+- Make the homepage
+- Come up with codenames for the tests
 - Add the skills
     - Reaction Speed
     - Aim Trainer
