@@ -16,7 +16,6 @@ export default function Numbers(){
     function getNumber(min, max) {
         return Math.floor(Math.random() * (max - min) ) + min;
     }
-    let round = 10
 
     useEffect(() => {
         const timer = setInterval(() => {
