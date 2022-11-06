@@ -6,6 +6,9 @@ module.exports = {
         './components/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
+      fontFamily: {
+        'code': ['ui-monospace', 'Source Code Pro']
+      },
       extend: {},
     },
     plugins: [],

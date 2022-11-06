@@ -1,8 +1,8 @@
-import React from 'react'
+//import React from 'react'
 import dynamic from 'next/dynamic'
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
-    ssr: false,
-  })
+  ssr: false,
+})
 
 let size = 100
 let bubbles = new Array(size)
@@ -17,10 +17,6 @@ export default function BubbleTheory(){
 		// use parent to render the canvas in this ref
 		// (without that p5 will render the canvas outside of your component)
 		p5.createCanvas(width, height).parent(canvasParentRef);
-        function fill(c){
-            return p5.fill(c)
-        }
-
         class Bubble {
             constructor(x, y, r, w, h, c, m, s, p5) {
               this.x = x
