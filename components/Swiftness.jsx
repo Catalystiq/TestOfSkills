@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import NavBar from './NavBar'
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })
@@ -97,9 +98,13 @@ export default function Swiftness(){
     
 
 	return (
-    <div className="h-screen w-full flex bg-gradient-to-r from-cyan-500 to-blue-500">
+    <div>
+      <NavBar></NavBar>
+      <div className="h-screen w-full flex bg-gray-500">
       <Sketch setup={setup} draw={draw} />
     </div>
+    </div>
+    
     
   );
 };
