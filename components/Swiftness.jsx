@@ -43,8 +43,8 @@ export default function Swiftness(){
               }
               
               changePosition() {
-                this.x = p5.random(this.r, width-this.r)
-                this.y = p5.random(this.r, height-this.r)
+                this.x = p5.random(width/4, width * 3/4)
+                this.y = p5.random(height/4, height * 3/4)
                 createdTime = Date.now()
               }
             
@@ -100,11 +100,8 @@ export default function Swiftness(){
 	return (
     <div>
       <NavBar></NavBar>
-      <div className="h-screen w-full flex bg-gray-500">
-      <Sketch setup={setup} draw={draw} />
+        <Sketch setup={setup} draw={draw} />
+        <div className='w-full h-96 bg-black'></div>
     </div>
-    </div>
-    
-    
   );
 };
