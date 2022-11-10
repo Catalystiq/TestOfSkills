@@ -101,7 +101,6 @@ export default function Swiftness(){
     <div>
       <NavBar></NavBar>
         <Sketch setup={setup} draw={draw} />
-        <div className='w-full h-96 bg-black'></div>
     </div>
   );
 };
