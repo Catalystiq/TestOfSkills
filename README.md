@@ -17,7 +17,7 @@ A Web App to test one's skill for a STEM Expo Project
 
 # TODO
 - Make the homepage
-- Come up with codenames for the tests
+✓ Come up with codenames for the tests
 - Add the skills
     - Tenacity
     - Swiftness
