@@ -12,6 +12,7 @@ export default function Home() {
         <Link href='/order' className="text-2xl text-white font-semibold underline font-mono">Test of Order</Link>
         <Link href='/swiftness' className="text-2xl text-white font-semibold underline">Test of Swiftness</Link>
         <Link href='/bubbletheory' className="text-2xl text-white font-semibold underline">Bubble Theory</Link>
+        <Link href='/tenacity' className="text-2xl text-white font-semibold underline">Test of Tenacity</Link>
       </div>
     </div>
     

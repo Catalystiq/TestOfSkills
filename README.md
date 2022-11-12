@@ -16,7 +16,7 @@ A Web App to test one's skill for a STEM Expo Project
 - Test of Linguistics (word memory)
 
 # TODO
-- Make the homepage
+- Make the homepage\
 ✓ Come up with codenames for the tests
 - Add the skills
     - Tenacity
