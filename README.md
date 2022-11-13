@@ -9,19 +9,27 @@ A Web App to test one's skill for a STEM Expo Project
 # Skills
 - Test of Tenacity (reaction speed)
 - Test of Swiftness (aim trainer)
-- Test of Mastery (timed aim trainer - SB Dojo)
-- Test of Discipline (hit the right targets - SB Dojo)
+- Test of Force (hit targets with right mode - SB Dojo)
+- Test of Discipline (hit postive targets, avoid negative ones - SB Dojo)
 - Test of Control (stay on the square - SB Dojo)
 - Test of Order (number memory)
 - Test of Linguistics (word memory)
+
+# New Plan
+- Use p5 for all of the tests
+- Order and Linguistics might not be implemented, i will have to see
+- No radixui or tailwind for the tests (rip)
+- This is because it will take much longer to make the tests
+- Pros: logic will be much easier to implement
+- Cons: styling will be a pain
 
 # TODO
 - Make the homepage\
 ✓ Come up with codenames for the tests
 - Add the skills
-    - Tenacity
-    - Swiftness
-    - Mastery
+    - Tenacity\
+    ✓ Swiftness
+    - Force
     - Discipline
     - Control
     - Order

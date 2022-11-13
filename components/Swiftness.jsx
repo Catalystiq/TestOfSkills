@@ -4,26 +4,63 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })
 
-let size = 1
-let bubbles = new Array(size)
-let width = window.innerWidth
-let height = window.innerHeight/2
-let radius = 50
-let move = 1
-
-let clickedTime
-let createdTime 
-let reactionTime
-
 export default function Swiftness(){
+  let bubble
+  let width = window.innerWidth-16
+  let height = window.innerHeight*2/3
+  let radius = 50
+  let move = 1
+  let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
+  let remaining = 30
+  let targets = remaining-1
+  let times = []
+
+  let clickedTime
+  let createdTime = Date.now()
+  let reactionTime
+  let averageTime
+
+  let titleText
+  let descriptionText
+  let instructionsText
+  let finalText
+  let saveScoreText
+
+  let reactionText
+  let remainingText
+  let averageText
+
 	const setup = (p5, canvasParentRef) => {
-		// use parent to render the canvas in this ref
-		// (without that p5 will render the canvas outside of your component)
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
     cnv.mousePressed(() => {
-      //console.log("Clicked on the canvas. Event:")
       mousePressed()
     })
+
+    titleText = p5.createDiv('Test of Swiftness')
+    titleText.style('font-size', '3rem');
+    titleText.style('color', 'white')
+    titleText.position(width/2-224, height/5);
+    titleText.style('font-family', 'monospace')
+
+    descriptionText = p5.createDiv(`hit ${remaining} targets as swiftly as you can`)
+    descriptionText.style('font-size', '1rem');
+    descriptionText.style('color', 'white')
+    descriptionText.position(width/2-158, height/3);
+    descriptionText.style('font-family', 'monospace')
+
+    instructionsText = p5.createDiv(`click the target below to begin`)
+    instructionsText.style('font-size', '1rem');
+    instructionsText.style('color', 'white')
+    instructionsText.position(width/2-136, height/3+24);
+    instructionsText.style('font-family', 'monospace')
+
+    reactionText = p5.createDiv(``)
+    remainingText = p5.createDiv(``)
+    averageText= p5.createDiv(``)
+    finalText = p5.createDiv(``)
+    saveScoreText= p5.createDiv(``)
+    
+    
 
         class Bubble {
             constructor(x, y, r, w, h, c, m, s) {
@@ -39,12 +76,12 @@ export default function Swiftness(){
             }
 
             changeColor(bright) {
-                this.brightness = bright;
+                this.c = bright;
               }
               
               changePosition() {
-                this.x = p5.random(width/4, width * 3/4)
-                this.y = p5.random(height/4, height * 3/4)
+                this.x = p5.random(width/3, width * 2/3)
+                this.y = p5.random(height/3, height * 2/3)
                 createdTime = Date.now()
               }
             
@@ -58,41 +95,81 @@ export default function Swiftness(){
               }
           
             show() {
-              p5.stroke(this.c)
-              p5.fill(this.brightness, this.c)
+              p5.stroke(255)
+              p5.fill(this.c)
               p5.strokeWeight(this.s)
               p5.ellipse(this.x, this.y, this.r * 2)
             }
           }
 
-          bubbles = bubbles.fill().map(() => new Bubble(p5.random(radius, width-radius), p5.random(radius, height-radius), radius, width, height, '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'), move, 4))
+          bubble = new Bubble(width/2, height/2, radius, width, height, color, move, 4)
 
           function mousePressed() {
-            for (let i = bubbles.length - 1; i >= 0; i--) {
-              if (bubbles[i].contains(p5.mouseX, p5.mouseY)) {
-                //bubbles.splice(i, 1);
+            if(remaining > 0){
+              if (bubble.contains(p5.mouseX, p5.mouseY)) {
+                titleText.hide()
+                descriptionText.hide()
+                instructionsText.hide()
+
+                remaining -= 1
                 clickedTime = Date.now()
                 reactionTime = clickedTime-createdTime
+                times.push(reactionTime)
                 console.log(reactionTime + 'ms')
-                bubbles[i].changePosition()
-              }
+                  reactionText.html(`reaction time is: ${reactionTime}ms`)
+                  reactionText.style('font-size', '1rem');
+                  reactionText.style('color', 'white')
+                  reactionText.position(width/2-84, height);
+                  reactionText.style('font-family', 'monospace')
+
+                  remainingText.html(`remaining targets: ${remaining}`)
+                  remainingText.style('font-size', '1rem');
+                  remainingText.style('color', 'white')
+                  remainingText.position(width/2-84, height-24);
+                  remainingText.style('font-family', 'monospace')
+
+                bubble.changePosition()
+
+                if(remaining == 1){
+                  times.shift()
+                }
+              }              
             }
           }
 	};
 
 	const draw = (p5) => {
 		p5.background(0);
-    for (let bubble = 0; bubble < bubbles.length; bubble++) {
-        if (bubbles[bubble].contains(p5.mouseX, p5.mouseY)) {
-            bubbles[bubble].changeColor(100);
-          } else {
-            bubbles[bubble].changeColor(0);
-          }
-        bubbles[bubble].show()
+    if(remaining > 0){
+      if (bubble.contains(p5.mouseX, p5.mouseY)) {
+          bubble.changeColor(255);
+        } else {
+          bubble.changeColor(color);
+        }
+      bubble.show()
+    }else{
+      reactionText.hide()
+      remainingText.hide()
+      averageTime = Math.round((times.reduce((partialSum, a) => partialSum + a, 1))/targets)
+
+      finalText.html('average time per target')
+      finalText.style('font-size', '2rem');
+      finalText.style('color', 'white')
+      finalText.position(width/2-202, height/3);
+      finalText.style('font-family', 'monospace')
+
+      averageText.html(`${averageTime}ms`)
+      averageText.style('font-size', '4rem');
+      averageText.style('color', 'limegreen')
+      averageText.position(width/2-88, height/2);
+      averageText.style('font-family', 'monospace')
+
+      saveScoreText.html('to retry, refresh the page')
+      saveScoreText.style('font-size', '2rem');
+      saveScoreText.style('color', 'white')
+      saveScoreText.position(width/2-229, height*3/4);
+      saveScoreText.style('font-family', 'monospace')
     }
-		// NOTE: Do not use setState in the draw function or in functions that are executed
-		// in the draw function...
-		// please use normal variables or class properties for these purposes
 	}
 
     
@@ -101,6 +178,7 @@ export default function Swiftness(){
     <div>
       <NavBar></NavBar>
         <Sketch setup={setup} draw={draw} />
+        <div className='w-full h-96 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
     </div>
   );
 };
