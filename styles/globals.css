@@ -6,7 +6,7 @@ button {
     all: unset;
 }
   
-.Toggle {
+/* .Toggle {
     background-color: white;
     color: black;
     height: 24rem;
@@ -16,8 +16,9 @@ button {
     line-height: 1;
     align-items: center;
     justify-content: center;
-}
+} */
+
 .Toggle[data-state='on'] {
     background-color: black;
     color: white;
-}
+} 

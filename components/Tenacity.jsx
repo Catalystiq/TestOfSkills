@@ -9,7 +9,8 @@ export default function Tenacity(){
         // </div>
         <div>
         <NavBar></NavBar>
-            <TogglePrimitive.Root className="Toggle">
+            {/* <TogglePrimitive.Root className="Toggle"> */}
+            <TogglePrimitive.Root className="Toggle bg-white text-black h-96 w-full flex text-6xl items-center justify-center">
                 test
             </TogglePrimitive.Root>
         </div>
