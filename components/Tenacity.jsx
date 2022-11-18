@@ -1,30 +1,30 @@
+import dynamic from 'next/dynamic'
 import NavBar from './NavBar'
-import { useState } from 'react'
-import * as TogglePrimitive from '@radix-ui/react-toggle';
+const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
+  ssr: false,
+})
+
+let width = window.innerWidth-16
+let height = window.innerHeight*2/3
 
 export default function Tenacity(){
-    const [starred, setStarred] = useState(false);
-    let [count, setCount] = useState(0)
 
+    const setup = (p5, canvasParentRef) => {
+        let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
+        cnv.mousePressed(() => {
 
+        })
+    }
+
+    const draw = (p5) => {
+        p5.background(0)
+    }
     return(
-        // <div>
-        //     <NavBar></NavBar>
-        //     <button className='w-full h-96 bg-black text-white'>test button</button>
-        // </div>
         <div>
-        <NavBar></NavBar>
-            {/* <TogglePrimitive.Root className="Toggle"> */}
-            <TogglePrimitive.Root className="Toggle bg-white text-black h-96 w-full flex text-6xl items-center justify-center"
-                defaultPressed={starred}
-                onPressedChange={setStarred}
-                asChild
-            >
-                <span>{starred ? "Starred" : "Star"}</span>
-            </TogglePrimitive.Root>
+            <NavBar></NavBar>
+            <Sketch setup={setup} draw={draw} />
+            <div className='w-full h-96 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
         </div>
-
-
     )
 }
 
