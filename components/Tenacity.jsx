@@ -11,6 +11,7 @@ export default function Tenacity(){
     let height = window.innerHeight*2/3
     let color
     let started = false
+    let remaining = 5
 
     let titleText
     let descriptionText
@@ -18,6 +19,7 @@ export default function Tenacity(){
 
     const setup = (p5, canvasParentRef) => {
         color = p5.color(0,0,0)
+
         
 
         titleText = p5.createDiv('')
@@ -30,7 +32,7 @@ export default function Tenacity(){
         })
 
         function mousePressed() {
-            started = !started
+            started = true
         }
 
 
@@ -38,10 +40,16 @@ export default function Tenacity(){
 
     const draw = (p5) => {
         p5.background(color)
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) ) + min;
+        }
         if(started == false){
             startShow()
-        }else{
+        }else if(started == true){
             startHide()
+            setTimeout(() => {
+                console.log('test')
+            }, random(5000,10000))
         }
 
         function startShow() {
