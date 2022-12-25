@@ -9,7 +9,6 @@ export default function Swiftness(){
   let width = window.innerWidth-16
   let height = window.innerHeight*2/3
   let radius = 50
-  let move = 1
   let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
   let remaining = 30
   let targets = remaining-1
@@ -70,7 +69,6 @@ export default function Swiftness(){
               this.w = w
               this.h = h
               this.c = c
-              this.m = m
               this.s = s
               this.brightness = 0
             }
@@ -102,7 +100,7 @@ export default function Swiftness(){
             }
           }
 
-          bubble = new Bubble(width/2, height/2, radius, width, height, color, move, 4)
+          bubble = new Bubble(width/2, height/2, radius, width, height, color, 4)
 
           function mousePressed() {
             if(remaining > 0){

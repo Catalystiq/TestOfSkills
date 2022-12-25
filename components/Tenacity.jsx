@@ -7,6 +7,7 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 
 export default function Tenacity(){
+    let button
     let width = window.innerWidth-16
     let height = window.innerHeight*2/3
     let color
@@ -19,22 +20,38 @@ export default function Tenacity(){
 
     const setup = (p5, canvasParentRef) => {
         color = p5.color(0,0,0)
-
+        let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
+        cnv.mousePressed(() => {
+            mousePressed()
+        })
         
 
         titleText = p5.createDiv('')
         descriptionText = p5.createDiv(``)
         instructionsText = p5.createDiv(``)
 
-        let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
-        cnv.mousePressed(() => {
-            mousePressed()
-        })
+
 
         function mousePressed() {
             started = true
         }
 
+        class Button {
+            constructor(x, y, w, h, c) {
+                this.x = x
+                this.y = y
+                this.w = w
+                this.h = h
+                this.c = c
+            }
+
+            show() {
+                p5.fill(this.c)
+                p5.rect(this.x, this.y, this.w, this.y)
+            }
+        }
+
+        button = new Button(0, 0, width, height, p5.color(255, 0, 0))
 
     }
 
@@ -46,8 +63,14 @@ export default function Tenacity(){
         if(started == false){
             startShow()
         }else if(started == true){
+            newRound()
+        }
+
+        function newRound() {
+            color = p5.color(255,0,0)
             startHide()
             setTimeout(() => {
+                color = p5.color(0,255,0)
                 console.log('test')
             }, random(5000,10000))
         }
