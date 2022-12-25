@@ -62,7 +62,7 @@ export default function Swiftness(){
     
 
         class Bubble {
-            constructor(x, y, r, w, h, c, m, s) {
+            constructor(x, y, r, w, h, c, s) {
               this.x = x
               this.y = y
               this.r = r
