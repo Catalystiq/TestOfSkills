@@ -1,3 +1,4 @@
+import { ChatBubbleIcon } from '@radix-ui/react-icons'
 import dynamic from 'next/dynamic'
 import NavBar from './NavBar'
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
@@ -56,24 +57,9 @@ export default function Tenacity(){
     }
 
     const draw = (p5) => {
-        p5.background(color)
-        function random(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) ) + min;
-        }
-        if(started == false){
-            startShow()
-        }else if(started == true){
-            newRound()
-        }
+        p5.background(0)
+        button.show()
 
-        function newRound() {
-            color = p5.color(255,0,0)
-            startHide()
-            setTimeout(() => {
-                color = p5.color(0,255,0)
-                console.log('test')
-            }, random(5000,10000))
-        }
 
         function startShow() {
             titleText.show()
