@@ -10,7 +10,7 @@ export default function Swiftness(){
   let height = window.innerHeight*2/3
   let radius = 50
   let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
-  let remaining = 30
+  let remaining = 31
   let targets = remaining-1
   let times = []
 
@@ -113,7 +113,7 @@ export default function Swiftness(){
                 clickedTime = Date.now()
                 reactionTime = clickedTime-createdTime
                 times.push(reactionTime)
-                console.log(reactionTime + 'ms')
+                //console.log(reactionTime + 'ms')
                   reactionText.html(`reaction time is: ${reactionTime}ms`)
                   reactionText.style('font-size', '1rem');
                   reactionText.style('color', 'white')

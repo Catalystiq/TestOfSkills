@@ -4,15 +4,14 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })
 
-
-
 export default function Tenacity(){
     let bubble
+    let bgColor = '#000000'
     let width = window.innerWidth-16
     let height = window.innerHeight*2/3
-    let radius = 50
-    let color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
-    let remaining = 30
+    let radius = 100
+    let color = '#00ff00'
+    let remaining = 6
     let targets = remaining-1
     let times = []
   
@@ -40,19 +39,19 @@ export default function Tenacity(){
     titleText = p5.createDiv('Test of Tenacity')
     titleText.style('font-size', '3rem');
     titleText.style('color', 'white')
-    titleText.position(width/2-224, height/5);
+    titleText.position(width/2-211, height/5);
     titleText.style('font-family', 'monospace')
 
     descriptionText = p5.createDiv('when this box turns green, click as swiftly as you can')
     descriptionText.style('font-size', '1rem');
     descriptionText.style('color', 'white')
-    descriptionText.position(width/2-158, height/3);
+    descriptionText.position(width/2-237.5, height/3);
     descriptionText.style('font-family', 'monospace')
 
-    instructionsText = p5.createDiv('click this box to begin')
+    instructionsText = p5.createDiv('click the green box to begin')
     instructionsText.style('font-size', '1rem');
     instructionsText.style('color', 'white')
-    instructionsText.position(width/2-136, height/3+24);
+    instructionsText.position(width/2-123, height/3+24);
     instructionsText.style('font-family', 'monospace')
 
     reactionText = p5.createDiv(``)
@@ -72,41 +71,43 @@ export default function Tenacity(){
               this.h = h
               this.c = c
               this.s = s
-              this.brightness = 0
             }
-
-            changeColor(bright) {
-                this.c = bright;
-              }
               
-              changePosition() {
-                this.x = p5.random(width/3, width * 2/3)
-                this.y = p5.random(height/3, height * 2/3)
+            changePosition() {
+              this.r = 0
+              this.w = 0
+              this.h = 0
+              this.x = width-width
+              this.y = height-height
+              setTimeout(() => {
                 createdTime = Date.now()
-              }
+                this.w = width
+                this.h = height
+              }, p5.random(3000, 7000))
+
+            }
             
-              contains(px, py) {
-                let d = p5.dist(px, py, this.x, this.y);
-                if (d < this.r) {
-                  return true;
-                } else {
-                  return false;
-                }
+            contains() {
+              if(this.w != 0 && this.h != 0){
+                return true
+              }else{
+                return false
               }
+            }
           
             show() {
-              p5.stroke(255)
               p5.fill(this.c)
-              p5.strokeWeight(this.s)
-              p5.ellipse(this.x, this.y, this.r * 2)
+              p5.noStroke
+              p5.rect(this.x, this.y, this.w, this.h)
             }
           }
 
-          bubble = new Bubble(width/2, height/2, radius, width, height, color, 4)
+          bubble = new Bubble(width/2-radius/2, height/2, radius, radius, radius, color, 4)
 
           function mousePressed() {
             if(remaining > 0){
-              if (bubble.contains(p5.mouseX, p5.mouseY)) {
+              if (bubble.contains()) {
+                bgColor = '#ff0000'
                 titleText.hide()
                 descriptionText.hide()
                 instructionsText.hide()
@@ -115,18 +116,19 @@ export default function Tenacity(){
                 clickedTime = Date.now()
                 reactionTime = clickedTime-createdTime
                 times.push(reactionTime)
-                console.log(reactionTime + 'ms')
-                  reactionText.html(`reaction time is: ${reactionTime}ms`)
-                  reactionText.style('font-size', '1rem');
-                  reactionText.style('color', 'white')
-                  reactionText.position(width/2-84, height);
-                  reactionText.style('font-family', 'monospace')
+                //console.log(reactionTime + 'ms')
 
-                  remainingText.html(`remaining targets: ${remaining}`)
-                  remainingText.style('font-size', '1rem');
-                  remainingText.style('color', 'white')
-                  remainingText.position(width/2-84, height-24);
-                  remainingText.style('font-family', 'monospace')
+                reactionText.html(`reaction time is: ${reactionTime}ms`)
+                reactionText.style('font-size', '1rem');
+                reactionText.style('color', 'white')
+                reactionText.position(width/2-84, height);
+                reactionText.style('font-family', 'monospace')
+
+                remainingText.html(`remaining targets: ${remaining}`)
+                remainingText.style('font-size', '1rem');
+                remainingText.style('color', 'white')
+                remainingText.position(width/2-84, height-24);
+                remainingText.style('font-family', 'monospace')
 
                 bubble.changePosition()
 
@@ -139,15 +141,11 @@ export default function Tenacity(){
 	};
 
     const draw = (p5) => {
-		p5.background(0);
+		p5.background(p5.color(bgColor))
     if(remaining > 0){
-      if (bubble.contains(p5.mouseX, p5.mouseY)) {
-          bubble.changeColor(255);
-        } else {
-          bubble.changeColor(color);
-        }
       bubble.show()
     }else{
+      bgColor = '#000000'
       reactionText.hide()
       remainingText.hide()
       averageTime = Math.round((times.reduce((partialSum, a) => partialSum + a, 1))/targets)
