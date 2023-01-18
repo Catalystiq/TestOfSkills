@@ -10,11 +10,6 @@ const Order = dynamic(() => import('../components/Order'), {
 
 export default function Home() {
   return(
-    <div>
-      <NavBar></NavBar>
       <Order></Order>
-    </div>
-    
   )
-  
 }
