@@ -25,6 +25,7 @@ export default function Tenacity(){
     let instructionsText
     let finalText
     let saveScoreText
+    let clickText
   
     let reactionText
     let remainingText
@@ -35,7 +36,6 @@ export default function Tenacity(){
         cnv.mousePressed(() => {
             mousePressed()
         })
-
     titleText = p5.createDiv('Test of Tenacity')
     titleText.style('font-size', '3rem');
     titleText.style('color', 'white')
@@ -59,6 +59,7 @@ export default function Tenacity(){
     averageText= p5.createDiv(``)
     finalText = p5.createDiv(``)
     saveScoreText= p5.createDiv(``)
+    clickText = p5.createDiv(``)
     
     
 
@@ -83,6 +84,7 @@ export default function Tenacity(){
                 createdTime = Date.now()
                 this.w = width
                 this.h = height
+                clickText.html(`click`)
               }, p5.random(3000, 7000))
 
             }
@@ -119,16 +121,22 @@ export default function Tenacity(){
                 //console.log(reactionTime + 'ms')
 
                 reactionText.html(`reaction time is: ${reactionTime}ms`)
-                reactionText.style('font-size', '1rem');
+                reactionText.style('font-size', '1rem')
                 reactionText.style('color', 'white')
-                reactionText.position(width/2-84, height);
+                reactionText.position(width/2-84, height)
                 reactionText.style('font-family', 'monospace')
 
                 remainingText.html(`remaining targets: ${remaining}`)
-                remainingText.style('font-size', '1rem');
+                remainingText.style('font-size', '1rem')
                 remainingText.style('color', 'white')
-                remainingText.position(width/2-84, height-24);
+                remainingText.position(width/2-84, height-24)
                 remainingText.style('font-family', 'monospace')
+
+                clickText.html(`wait...`)
+                clickText.style('font-size', '4rem')
+                clickText.style('color', 'white')
+                clickText.position(width/2-88, height/2)
+                clickText.style('font-family', 'monospace')
 
                 bubble.changePosition()
 
@@ -148,12 +156,13 @@ export default function Tenacity(){
       bgColor = '#000000'
       reactionText.hide()
       remainingText.hide()
+      clickText.hide()
       averageTime = Math.round((times.reduce((partialSum, a) => partialSum + a, 1))/targets)
 
-      finalText.html('average time per target')
+      finalText.html('average reaction time')
       finalText.style('font-size', '2rem');
       finalText.style('color', 'white')
-      finalText.position(width/2-202, height/3);
+      finalText.position(width/2-185, height/3);
       finalText.style('font-family', 'monospace')
 
       averageText.html(`${averageTime}ms`)
