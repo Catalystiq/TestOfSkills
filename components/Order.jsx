@@ -18,27 +18,27 @@ export default function Order(){
       
 
   
-  var timer = p5.createDiv(counter);
-  timer.style('font-size', '1rem');
-  timer.style('color', 'white')
-  timer.position(width/2-123, height/3+24);
-  timer.style('font-family', 'monospace')
+    var timerText = p5.createDiv(counter);
+    timerText.style('font-size', '2rem');
+    timerText.style('color', 'white')
+    timerText.position(width/2-123, height/3+24);
+    timerText.style('font-family', 'monospace')
 
-  
-  function timeIt(){
-    if(counter >= 0){
-      counter = counter - 0.5
-      console.log(counter)
-      timer.html(counter)
-    }else{
-      counter = 0
-      round ++
-      counter = round + 3
+    
+    function timer(){
+      if(counter >= 0){
+        counter = counter - 0.5
+        //console.log(counter)
+        timerText.html(`${counter} sec`)
+      }else{
+        counter = 0
+        round ++
+        counter = round + 3
+      }
     }
-  }
-  
-  setInterval(timeIt, 1000);//native function 1000ms =1 s
-  //request animationframe is also another func
+    
+    setInterval(timer, 1000);//native function 1000ms =1 s
+    //request animationframe is also another func
 
 
 	};
