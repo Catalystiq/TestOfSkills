@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import NavBar from './NavBar'
+import randomWord from 'random-word-by-length'
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })
@@ -33,8 +34,6 @@ export default function Order(){
   let finalGuess
   let roundText
   let saveScoreText
-
-
 
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
@@ -96,6 +95,8 @@ export default function Order(){
       guessInstructions.hide()
       guessInput.hide()
       guessButton.hide()
+
+      console.log(randomWord())
 
       numberText.html(``)
       numberText.show()
