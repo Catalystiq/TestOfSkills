@@ -217,11 +217,35 @@ export default function Order(){
 
       
 
-      // finalNumberTitle.html('The number was...')
-      // finalNumberTitle.style('font-size', '2rem');
-      // finalNumberTitle.style('color', 'white')
-      // finalNumberTitle.position(width/2-211, height/3);
-      // finalNumberTitle.style('font-family', 'monospace')
+      finalNumberTitle.html('The number was...')
+      finalNumberTitle.style('font-size', '2rem');
+      finalNumberTitle.style('color', 'white')
+      finalNumberTitle.position(width/2-150, height/3-100);
+      finalNumberTitle.style('font-family', 'monospace')
+
+      finalNumber.html(`${number}`)
+      finalNumber.style('font-size', '3rem');
+      finalNumber.style('color', 'limegreen')
+      finalNumber.position(width/2-(13 * (round + 1)), height/3-50)
+      finalNumber.style('font-family', 'monospace')
+
+      finalGuessTitle.html('Your guess was...')
+      finalGuessTitle.style('font-size', '2rem');
+      finalGuessTitle.style('color', 'white')
+      finalGuessTitle.position(width/2-150, height/3+50);
+      finalGuessTitle.style('font-family', 'monospace')
+
+      finalGuess.html(`${guess}`)
+      finalGuess.style('font-size', '3rem');
+      finalGuess.style('color', 'red')
+      finalGuess.position(width/2-(13 * (guess.length)), height/3+100)
+      finalGuess.style('font-family', 'monospace')
+
+      saveScoreText.html('to retry, refresh the page')
+      saveScoreText.style('font-size', '2rem');
+      saveScoreText.style('color', 'white')
+      saveScoreText.position(width/2-229, height*3/4);
+      saveScoreText.style('font-family', 'monospace')
     }
 	}
 
