@@ -130,14 +130,6 @@ export default function Order(){
           counter = counter - 1
           timerText.html(`${counter} sec`)
         }else{
-          // lower = round
-          // higher = round + 1
-  
-          // counter = 0
-          // round ++
-          // counter = round + 4
-          // console.log(10 ** lower, 10 ** higher)
-          // console.log(lower, higher)
           clearInterval(timerInterval)
           showGuess()
         }
