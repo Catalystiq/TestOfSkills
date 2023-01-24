@@ -27,6 +27,14 @@ export default function Order(){
   let guessInput
   let guessButton
 
+  let finalNumberTitle
+  let finalNumber
+  let finalGuessTitle
+  let finalGuess
+  let roundText
+  let saveScoreText
+
+
 
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
@@ -38,22 +46,22 @@ export default function Order(){
         return Math.floor(Math.random() * (max - min) ) + min;
       }
       
-    titleText = p5.createDiv('Test of Tenacity')
+    titleText = p5.createDiv('Test of Order')
     titleText.style('font-size', '3rem');
     titleText.style('color', 'white')
-    titleText.position(width/2-211, height/5);
+    titleText.position(width/2-172, height/5);
     titleText.style('font-family', 'monospace')
 
-    descriptionText = p5.createDiv('when this box turns green, click as swiftly as you can')
+    descriptionText = p5.createDiv('remember the longest integer you can')
     descriptionText.style('font-size', '1rem');
     descriptionText.style('color', 'white')
-    descriptionText.position(width/2-237.5, height/3);
+    descriptionText.position(width/2-158.5, height/3);
     descriptionText.style('font-family', 'monospace')
 
-    instructionsText = p5.createDiv('click the green box to begin')
+    instructionsText = p5.createDiv('click the start button to begin')
     instructionsText.style('font-size', '1rem');
     instructionsText.style('color', 'white')
-    instructionsText.position(width/2-123, height/3+24);
+    instructionsText.position(width/2-136, height/3+24);
     instructionsText.style('font-family', 'monospace')
 
     startButton = p5.createButton('start')
@@ -67,19 +75,32 @@ export default function Order(){
 
     timerText = p5.createDiv(``)
     numberText = p5.createDiv(``)
+
     guessTitle = p5.createDiv(``)
     guessInstructions = p5.createDiv(``)
     guessInput = p5.createInput(``)
     guessButton = p5.createButton(``)
 
+    finalNumberTitle = p5.createDiv(``)
+    finalNumber = p5.createDiv(``)
+    finalGuessTitle = p5.createDiv(``)
+    finalGuess = p5.createDiv(``)
+    roundText = p5.createDiv(``)
+    saveScoreText = p5.createDiv(``)
+
   
 
 
     function showNumber() {
+      guessTitle.hide()
+      guessInstructions.hide()
+      guessInput.hide()
+      guessButton.hide()
+
       numberText.html(``)
+      numberText.show()
       numberText.style('font-size', '4rem')
       numberText.style('color', 'white')
-      numberText.position(width/2-44, height/3)
       numberText.style('font-family', 'monospace')
 
       titleText.hide()
@@ -90,11 +111,13 @@ export default function Order(){
       counter = 0
       round ++
       lower = round
-      counter = round + 4
+      counter = round + 3
       higher = round + 1
       number = randomInteger(10 ** lower, 10 ** higher)
       numberText.html(number)
+      numberText.position(width/2-(18 * round), height/3)
 
+      timerText.show()
       timerText.html(`${counter} sec`)
       timerText.style('font-size', '2rem')
       timerText.style('color', 'white')
@@ -119,18 +142,24 @@ export default function Order(){
           // counter = round + 4
           // console.log(10 ** lower, 10 ** higher)
           // console.log(lower, higher)
+          clearInterval(timerInterval)
           showGuess()
         }
       }
 
 
       
-      setInterval(timer, 1000)
+      let timerInterval = setInterval(timer, 1000)
     }
 
     function showGuess() {
       timerText.hide()
       numberText.hide()
+
+      guessTitle.show()
+      guessInstructions.show()
+      guessInput.show()
+      guessButton.show()
 
       guessTitle.html('Enter the Number here...')
       guessTitle.style('font-size', '2rem');
@@ -144,6 +173,8 @@ export default function Order(){
       guessInstructions.position(width/2-44, height/2);
       guessInstructions.style('font-family', 'monospace')
 
+      guessInput.value('')
+      guessInput.elt.focus({preventScroll: true})
       guessInput.position(width/2-69, height-200)
       guessInput.style('font-size', '1rem');
       guessInput.style('font-family', 'monospace')
@@ -159,6 +190,13 @@ export default function Order(){
 
       guessButton.mousePressed(checkGuess)
 
+      guessInput.elt.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault()
+          checkGuess()
+        }
+      })
+
       function guessInputListener() {
         guess = this.value()
       }
@@ -166,17 +204,19 @@ export default function Order(){
 
     function checkGuess() {
       if(guess == number){
-        console.log('mega balls')
+        guess = undefined
+        showNumber()
+      }else{
+        endGame()
       }
     }
 
-    
-
-
-
-
-
-
+    function endGame() {
+      guessTitle.hide()
+      guessInstructions.hide()
+      guessInput.hide()
+      guessButton.hide()
+    }
 	}
 
   const draw = (p5) => {
