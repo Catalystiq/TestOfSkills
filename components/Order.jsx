@@ -96,7 +96,7 @@ export default function Order(){
       guessInput.hide()
       guessButton.hide()
 
-      console.log(randomWord())
+      //console.log(randomWord())
 
       numberText.html(``)
       numberText.show()
@@ -112,27 +112,22 @@ export default function Order(){
       counter = 0
       round ++
       lower = round
-      counter = round + 3
+      counter = round + 2
       higher = round + 1
       number = randomInteger(10 ** lower, 10 ** higher)
       numberText.html(number)
-      numberText.position(width/2-(18 * round), height/3)
+      numberText.position(width/2-(18 * (round + 1)), height/3)
 
       timerText.show()
       timerText.html(`${counter} sec`)
       timerText.style('font-size', '2rem')
       timerText.style('color', 'white')
       timerText.position(width/2-44, height/3+120)
-      timerText.style('font-family', 'monospace')
-  
-
-
-      
+      timerText.style('font-family', 'monospace')      
 
       function timer(){
         if(counter > 0){
           counter = counter - 1
-          //console.log(counter)
           timerText.html(`${counter} sec`)
         }else{
           // lower = round
@@ -165,24 +160,24 @@ export default function Order(){
       guessTitle.html('Enter the Number here...')
       guessTitle.style('font-size', '2rem');
       guessTitle.style('color', 'white')
-      guessTitle.position(width/2-185, height/3);
+      guessTitle.position(width/2-211, height/3);
       guessTitle.style('font-family', 'monospace')
 
       guessInstructions.html(`Press enter or the submit button to enter guess`)
       guessInstructions.style('font-size', '1rem');
       guessInstructions.style('color', 'white')
-      guessInstructions.position(width/2-44, height/2);
+      guessInstructions.position(width/2-207, height/2);
       guessInstructions.style('font-family', 'monospace')
 
       guessInput.value('')
       guessInput.elt.focus({preventScroll: true})
-      guessInput.position(width/2-69, height-200)
+      guessInput.position(width/2-95, height-200)
       guessInput.style('font-size', '1rem');
       guessInput.style('font-family', 'monospace')
       guessInput.input(guessInputListener)
 
       guessButton.html('submit')
-      guessButton.position(width/2-69, height-120)
+      guessButton.position(width/2-82, height-120)
       guessButton.style('font-size', '3rem');
       guessButton.style('color', 'black')
       guessButton.style('background', "darkgrey")
@@ -206,8 +201,10 @@ export default function Order(){
     function checkGuess() {
       if(guess == number){
         guess = undefined
+        console.log('success')
         showNumber()
-      }else{
+      }else if(guess != undefined && guess != number){
+        console.log('fail')
         endGame()
       }
     }
@@ -217,6 +214,14 @@ export default function Order(){
       guessInstructions.hide()
       guessInput.hide()
       guessButton.hide()
+
+      
+
+      // finalNumberTitle.html('The number was...')
+      // finalNumberTitle.style('font-size', '2rem');
+      // finalNumberTitle.style('color', 'white')
+      // finalNumberTitle.position(width/2-211, height/3);
+      // finalNumberTitle.style('font-family', 'monospace')
     }
 	}
 
