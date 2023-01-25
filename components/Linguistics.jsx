@@ -16,6 +16,12 @@ export default function Linguistics(){
     let startButton
 
     let wordText
+    let seenButton
+    let newButton
+    let livesText
+
+    let words = []
+    let lives = 3
 
 	const setup = (p5, canvasParentRef) => {
 	    let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
@@ -55,6 +61,9 @@ export default function Linguistics(){
         startButton.mousePressed(showWords)
 
         wordText = p5.createDiv(``)
+        seenButton = p5.createButton(``)
+        newButton = p5.createButton(``)
+        livesText = p5.createDiv(``)
 
         function showWords() {
             titleText.hide()
@@ -68,10 +77,53 @@ export default function Linguistics(){
             wordText.style('color', 'white')
             wordText.style('font-family', 'monospace')
 
+            livesText.html(``)
+            livesText.show()
+            livesText.style('font-size', '2rem')
+            livesText.style('color', 'white')
+            livesText.style('font-family', 'monospace')
+
             word = randomWord()
             wordText.html(word)
             wordText.position(width/2-(18 * (word.length)), height/3)
 
+            livesText.html(`${lives} lives`)
+            livesText.position(width/2-62, height/3+120)
+
+            seenButton.html('seen')
+            seenButton.position((width-55)*2/3-100, height-120)
+            seenButton.style('font-size', '3rem');
+            seenButton.style('color', 'black')
+            seenButton.style('background', "darkgrey")
+            seenButton.style('border-width', '3px')
+            seenButton.style('font-family', 'monospace')
+            seenButton.mousePressed(seenFunction)
+
+            newButton.html('new')
+            newButton.position((width-42)*1/3+100, height-120)
+            newButton.style('font-size', '3rem');
+            newButton.style('color', 'black')
+            newButton.style('background', "darkgrey")
+            newButton.style('border-width', '3px')
+            newButton.style('font-family', 'monospace')
+            newButton.mousePressed(newFunction)
+        }
+
+        function seenFunction() {
+            
+        }
+
+        function newFunction() {
+            if(words.every((currentWord) => currentWord != word)){
+                words.push(word)
+                console.log(words)
+                //word = randomWord()
+                wordText.html(word)
+            }else{
+                lives--
+                livesText.html(`${lives} lives`)
+                console.log(lives)
+            }
         }
     
     
