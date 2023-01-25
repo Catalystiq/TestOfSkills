@@ -77,7 +77,7 @@ export default function Order(){
 
     guessTitle = p5.createDiv(``)
     guessInstructions = p5.createDiv(``)
-    guessInput = p5.createInput(``)
+    guessInput = p5.createInput(``, 'number')
     guessButton = p5.createButton(``)
 
     finalNumberTitle = p5.createDiv(``)
@@ -233,10 +233,16 @@ export default function Order(){
       finalGuess.position(width/2-(13 * (guess.length)), height/3+100)
       finalGuess.style('font-family', 'monospace')
 
+      roundText.html(`Round ${round + 1}`)
+      roundText.style('font-size', '3rem');
+      roundText.style('color', 'white')
+      roundText.position(width/2-92, height*3/4-25);
+      roundText.style('font-family', 'monospace')
+
       saveScoreText.html('to retry, refresh the page')
       saveScoreText.style('font-size', '2rem');
       saveScoreText.style('color', 'white')
-      saveScoreText.position(width/2-229, height*3/4);
+      saveScoreText.position(width/2-229, height*3/4+100);
       saveScoreText.style('font-family', 'monospace')
     }
 	}
