@@ -86,16 +86,11 @@ export default function Order(){
     roundText = p5.createDiv(``)
     saveScoreText = p5.createDiv(``)
 
-  
-
-
     function showNumber() {
       guessTitle.hide()
       guessInstructions.hide()
       guessInput.hide()
       guessButton.hide()
-
-      //console.log(randomWord())
 
       numberText.html(``)
       numberText.show()
