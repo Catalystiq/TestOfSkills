@@ -31,8 +31,8 @@ A Web App to test one's skill for a STEM Expo Project
     ✓ Swiftness
     - Force
     - Discipline
-    - Control
-    - Order
+    - Control\
+    ✓ Order
     - Linguistics
 - Firebase?
 - Connect results to database
