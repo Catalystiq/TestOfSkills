@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import NavBar from './NavBar'
-import randomWord from 'random-word-by-length'
+import randomWord from 'random-word'
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })

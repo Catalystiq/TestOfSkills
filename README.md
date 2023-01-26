@@ -32,8 +32,8 @@ A Web App to test one's skill for a STEM Expo Project
     - Force
     - Discipline
     - Control\
-    ✓ Order
-    - Linguistics
+    ✓ Order\
+    ✓ Linguistics
 - Firebase?
 - Connect results to database
 - Use d3.js to display data into graphs
