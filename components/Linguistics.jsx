@@ -19,9 +19,15 @@ export default function Linguistics(){
     let seenButton
     let newButton
     let livesText
+    let roundText
 
     let words = []
     let lives = 3
+
+    let round = 0
+
+    let memorizedText
+    let saveScoreText
 
 	const setup = (p5, canvasParentRef) => {
 	    let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
@@ -64,6 +70,10 @@ export default function Linguistics(){
         seenButton = p5.createButton(``)
         newButton = p5.createButton(``)
         livesText = p5.createDiv(``)
+        roundText = p5.createDiv(``)
+
+        saveScoreText = p5.createDiv(``)
+        memorizedText = p5.createDiv(``)
 
         function showWords() {
             titleText.hide()
@@ -91,7 +101,7 @@ export default function Linguistics(){
             livesText.position(width/2-62, height/3+120)
 
             seenButton.html('seen')
-            seenButton.position((width-55)*2/3-100, height-120)
+            seenButton.position((width*3/4)-110, height-120)
             seenButton.style('font-size', '3rem');
             seenButton.style('color', 'black')
             seenButton.style('background', "darkgrey")
@@ -100,34 +110,98 @@ export default function Linguistics(){
             seenButton.mousePressed(seenFunction)
 
             newButton.html('new')
-            newButton.position((width-42)*1/3+100, height-120)
+            newButton.position((width*1/4)+42, height-120)
             newButton.style('font-size', '3rem');
             newButton.style('color', 'black')
             newButton.style('background', "darkgrey")
             newButton.style('border-width', '3px')
             newButton.style('font-family', 'monospace')
             newButton.mousePressed(newFunction)
+
+            roundText.html(`${round} Words`)
+            roundText.style('font-size', '3rem');
+            roundText.style('color', 'white')
+            roundText.position(width/2-105, height*3/4-25);
+            roundText.style('font-family', 'monospace')
         }
 
         function seenFunction() {
-            
+            if(lives > 0){
+                if(words.some(v => v.includes(word))){
+                    generateWord()
+                    wordText.html(word)
+                    round++
+                    roundText.html(`${round} Words`)
+                }else{
+                    lives--
+                    if(lives > 0){
+                        words.push(word)
+                        livesText.html(`${lives} lives`)
+                        generateWord()
+                        wordText.html(word)
+                    }else{
+                        endGame()
+                    }
+                }                
+            }else{
+                endGame()
+            }
+
+        }
+
+        function generateWord() {
+            if(randomInteger(0,100) % 4 == 0 && round > 3){
+                word = words[Math.floor(Math.random()*words.length)]
+                wordText.position(width/2-(18 * (word.length)), height/3)
+            }else{
+                word = randomWord()
+                wordText.position(width/2-(18 * (word.length)), height/3)
+            }
         }
 
         function newFunction() {
-            if(words.every((currentWord) => currentWord != word)){
-                words.push(word)
-                console.log(words)
-                //word = randomWord()
-                wordText.html(word)
+            if(lives > 0){
+                if(words.every((currentWord) => currentWord != word)){
+                    words.push(word)
+                    generateWord()
+                    wordText.html(word)
+                    round++
+                    roundText.html(`${round} Words`)
+                }else{
+                    lives--
+                    if(lives > 0){
+                        livesText.html(`${lives} lives`)
+                        generateWord()
+                        wordText.html(word)                      
+                    }else{
+                        endGame()
+                    }
+                }
             }else{
-                lives--
-                livesText.html(`${lives} lives`)
-                console.log(lives)
+                endGame()
             }
         }
-    
-    
-      
+
+        function endGame() {
+            wordText.hide()
+            livesText.hide()
+            seenButton.hide()
+            newButton.hide()
+
+            memorizedText.html('You memorized...')
+            memorizedText.style('font-size', '4rem');
+            memorizedText.style('color', 'white')
+            memorizedText.position(width/2-282, height/3+50);
+            memorizedText.style('font-family', 'monospace')
+
+            roundText.html(`${round} Words`)
+
+            saveScoreText.html('to retry, refresh the page')
+            saveScoreText.style('font-size', '2rem');
+            saveScoreText.style('color', 'white')
+            saveScoreText.position(width/2-229, height*3/4+100);
+            saveScoreText.style('font-family', 'monospace')
+        }
 	}
 
     const draw = (p5) => {
