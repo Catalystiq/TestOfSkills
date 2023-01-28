@@ -29,6 +29,8 @@ export default function Swiftness(){
   let remainingText
   let averageText
 
+  let resetButton
+
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
     cnv.mousePressed(() => {
@@ -41,7 +43,7 @@ export default function Swiftness(){
     titleText.position(width/2-224, height/5);
     titleText.style('font-family', 'monospace')
 
-    descriptionText = p5.createDiv(`hit ${remaining} targets as swiftly as you can`)
+    descriptionText = p5.createDiv(`hit ${remaining-1} targets as swiftly as you can`)
     descriptionText.style('font-size', '1rem');
     descriptionText.style('color', 'white')
     descriptionText.position(width/2-158, height/3);
@@ -57,7 +59,8 @@ export default function Swiftness(){
     remainingText = p5.createDiv(``)
     averageText= p5.createDiv(``)
     finalText = p5.createDiv(``)
-    saveScoreText= p5.createDiv(``)
+    //saveScoreText= p5.createDiv(``)
+    resetButton = p5.createButton(``)
     
     
 
@@ -162,11 +165,25 @@ export default function Swiftness(){
       averageText.position(width/2-88, height/2);
       averageText.style('font-family', 'monospace')
 
-      saveScoreText.html('to retry, refresh the page')
-      saveScoreText.style('font-size', '2rem');
-      saveScoreText.style('color', 'white')
-      saveScoreText.position(width/2-229, height*3/4);
-      saveScoreText.style('font-family', 'monospace')
+      // saveScoreText.html('to retry, refresh the page')
+      // saveScoreText.style('font-size', '2rem');
+      // saveScoreText.style('color', 'white')
+      // saveScoreText.position(width/2-229, height*3/4);
+      // saveScoreText.style('font-family', 'monospace')
+
+      resetButton.html('try again')
+      resetButton.position(width/2-122, height*3/4)
+      resetButton.style('font-size', '3rem');
+      resetButton.style('color', 'black')
+      resetButton.style('background', "darkgrey")
+      resetButton.style('border-width', '3px')
+      resetButton.style('font-family', 'monospace')
+      resetButton.mousePressed(reset)
+  
+    }
+
+    function reset() {
+      location.reload()
     }
 	}
 

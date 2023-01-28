@@ -34,6 +34,8 @@ export default function Order(){
   let roundText
   let saveScoreText
 
+  let resetButton
+
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
       cnv.mousePressed(() => {
@@ -84,7 +86,8 @@ export default function Order(){
     finalGuessTitle = p5.createDiv(``)
     finalGuess = p5.createDiv(``)
     roundText = p5.createDiv(``)
-    saveScoreText = p5.createDiv(``)
+    //saveScoreText = p5.createDiv(``)
+    resetButton = p5.createButton(``)
 
     function showNumber() {
       guessTitle.hide()
@@ -233,11 +236,24 @@ export default function Order(){
       roundText.position(width/2-92, height*3/4-25);
       roundText.style('font-family', 'monospace')
 
-      saveScoreText.html('to retry, refresh the page')
-      saveScoreText.style('font-size', '2rem');
-      saveScoreText.style('color', 'white')
-      saveScoreText.position(width/2-229, height*3/4+100);
-      saveScoreText.style('font-family', 'monospace')
+      // saveScoreText.html('to retry, refresh the page')
+      // saveScoreText.style('font-size', '2rem');
+      // saveScoreText.style('color', 'white')
+      // saveScoreText.position(width/2-229, height*3/4);
+      // saveScoreText.style('font-family', 'monospace')
+
+      resetButton.html('try again')
+      resetButton.position(width/2-122, height-45)
+      resetButton.style('font-size', '3rem');
+      resetButton.style('color', 'black')
+      resetButton.style('background', "darkgrey")
+      resetButton.style('border-width', '3px')
+      resetButton.style('font-family', 'monospace')
+      resetButton.mousePressed(reset)
+    }
+
+    function reset() {
+      location.reload()
     }
 	}
 

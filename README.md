@@ -9,8 +9,8 @@ A Web App to test one's skill for a STEM Expo Project
 # Skills
 - Test of Tenacity (reaction speed)
 - Test of Swiftness (aim trainer)
-- Test of Force (hit targets with right mode - SB Dojo)
-- Test of Discipline (hit postive targets, avoid negative ones - SB Dojo)
+- Test of Discipline (hit targets with right mode - SB Dojo)
+- Test of Force (hit postive targets, avoid negative ones - SB Dojo)
 - Test of Control (stay on the square - SB Dojo)
 - Test of Order (number memory)
 - Test of Linguistics (word memory)
