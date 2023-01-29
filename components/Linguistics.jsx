@@ -32,6 +32,9 @@ export default function Linguistics(){
 
     let resetButton
 
+    let results = []
+    let count = 0
+
 	const setup = (p5, canvasParentRef) => {
 	    let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
         cnv.mousePressed(() => {
@@ -214,6 +217,16 @@ export default function Linguistics(){
             resetButton.style('border-width', '3px')
             resetButton.style('font-family', 'monospace')
             resetButton.mousePressed(reset)
+
+            if(count == 0){
+                if(localStorage.linguistics != undefined){
+                  results = JSON.parse(localStorage.linguistics)
+                }
+                
+                results.push(round)
+                localStorage.setItem('linguistics', JSON.stringify(results))    
+                count++    
+            }
         }
 
         function reset() {

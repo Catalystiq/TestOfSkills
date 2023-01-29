@@ -33,6 +33,9 @@ export default function Tenacity(){
 
     let resetButton
 
+    let count = 0
+    let results = []
+
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
         cnv.mousePressed(() => {
@@ -188,6 +191,16 @@ export default function Tenacity(){
       resetButton.style('border-width', '3px')
       resetButton.style('font-family', 'monospace')
       resetButton.mousePressed(reset)
+
+      if(count == 0){
+        if(localStorage.tenacity != undefined){
+          results = JSON.parse(localStorage.tenacity)
+        }
+        
+        results.push(averageTime)
+        localStorage.setItem('tenacity', JSON.stringify(results))    
+        count++    
+      }
     }
 
     function reset() {

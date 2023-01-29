@@ -13,6 +13,7 @@ export default function Order(){
   let higher = round + 1
   let number
   let guess
+  let count = 0
 
   let titleText
   let descriptionText
@@ -35,6 +36,7 @@ export default function Order(){
   let saveScoreText
 
   let resetButton
+  let results = []
 
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef)
@@ -250,6 +252,16 @@ export default function Order(){
       resetButton.style('border-width', '3px')
       resetButton.style('font-family', 'monospace')
       resetButton.mousePressed(reset)
+
+      if(count == 0){
+        if(localStorage.order != undefined){
+          results = JSON.parse(localStorage.order)
+        }
+        
+        results.push(round + 1)
+        localStorage.setItem('order', JSON.stringify(results))    
+        count++    
+      }
     }
 
     function reset() {

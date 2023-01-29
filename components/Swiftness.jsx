@@ -13,6 +13,7 @@ export default function Swiftness(){
   let remaining = 31
   let targets = remaining-1
   let times = []
+  let count = 0
 
   let clickedTime
   let createdTime = Date.now()
@@ -30,6 +31,7 @@ export default function Swiftness(){
   let averageText
 
   let resetButton
+  let results = []
 
 	const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(width, height).parent(canvasParentRef);
@@ -179,6 +181,16 @@ export default function Swiftness(){
       resetButton.style('border-width', '3px')
       resetButton.style('font-family', 'monospace')
       resetButton.mousePressed(reset)
+
+      if(count == 0){
+        if(localStorage.swiftness != undefined){
+          results = JSON.parse(localStorage.swiftness)
+        }
+        
+        results.push(averageTime)
+        localStorage.setItem('swiftness', JSON.stringify(results))    
+        count++    
+      }
   
     }
 
