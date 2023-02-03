@@ -9,9 +9,6 @@ A Web App to test one's skill for a STEM Expo Project
 # Skills
 - Test of Tenacity (reaction speed)
 - Test of Swiftness (aim trainer)
-- Test of Discipline (hit targets with right mode - SB Dojo)
-- Test of Force (hit postive targets, avoid negative ones - SB Dojo)
-- Test of Control (stay on the square - SB Dojo)
 - Test of Order (number memory)
 - Test of Linguistics (word memory)
 
@@ -23,20 +20,21 @@ A Web App to test one's skill for a STEM Expo Project
 - Pros: logic will be much easier to implement
 - Cons: styling will be a pain
 
+# Final Plan
+- Only have the 4 main tests
+- No Discipline, Force, or Control
+- This is because it was not worth to make them for the STEM Expo
+- Turned out really well in the end
+- Added data collection, results.json, and code comments
+- Project Finished
+
 # TODO
-- Make the homepage\
-✓ Come up with codenames for the tests
-- Add the skills\
+✓ Make the homepage\
+✓ Come up with codenames for the test\
+✓ Add the skills\
     ✓ Tenacity\
-    ✓ Swiftness
-    - Force
-    - Discipline
-    - Control\
+    ✓ Swiftness\
     ✓ Order\
-    ✓ Linguistics
-- Firebase?
-- Connect results to database
-- Use d3.js to display data into graphs
-- Prompt user to complete reCaptcha to submit data
-- Done
-- Carbon Ads?
+    ✓ Linguistics\
+✓ Collect results\
+✓ Done
